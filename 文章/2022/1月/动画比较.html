@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+        }
+        .container{
+            width:100vw;
+            height:300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .title{
+            font-size: 52px;
+            font-weight: bold;
+        }
+        .sub_title{
+            font-size: 32px;
+        }
+        .btn_box{
+            display:flex;
+            padding:30px;
+        }
+        .btn{
+            color: #fff;
+            background-color: #409eff;
+            border-color: #409eff;
+            padding: 6px 10px;
+            margin-right:20px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .play_box{
+            /* position: */
+            width:100%;
+        }
+        #play{
+            width:100px;
+            height:100px;
+            background:chocolate;
+        }
+        .play_act{
+            animation: play-left 5s linear infinite;
+        }
+        @keyframes play-left {
+            0%{
+                margin-left:0px
+            }
+            30%{
+                margin-left:100px
+            }
+            60%{
+                margin-left:200px
+            }
+            100%{
+                margin-left:400px
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Welcome</div>
+        <div class="sub_title">动画性能测试</div>
+        <div class="play_box"><div id="play"></div></div>
+        
+    </div>
+    <div class="btn_box">
+        <div class="btn">css-animation-left</div>
+        <div class="btn">css-animation-transform</div>
+    </div>
+
+    <script>
+        const btns = document.querySelectorAll('.btn')
+        btns[0].addEventListener('click', e=>{
+            if(Array.from(play.classList).includes('play_act')){
+                play.classList.remove('play_act')
+            }else{
+                play.classList.add('play_act')
+            }
+            
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+
+    <script>
+        const t = Date.now()
+        function mySetTimeout (cb, delay) {
+            let startTime = Date.now()
+            loop()
+            function loop () {
+                if (Date.now() - startTime >= delay) {
+                    cb();
+                    return;
+                }
+                requestAnimationFrame(loop)
+            }
+            
+        }
+        setTimeout(()=>{
+            mySetTimeout(()=>console.log('mySetTimeout' ,Date.now()-t),2000) //mySetTimeout 2230
+            setTimeout(()=>console.log('setTimeout' ,Date.now()-t),2000) //setTimeout 2224
+        },3000)
+        // 
+        // 
+        // mySetTimeout(()=>console.log('mySetTimeout' ,Date.now()-t),5000) //5298
+        // setTimeout(()=>console.log('setTimeout' ,Date.now()-t),5000)
+
+        function timer() {
+            var speed = 500,
+            counter = 1, 
+            start = new Date().getTime();
+            
+            function instance(){
+                var ideal = (counter * speed),
+                real = (new Date().getTime() - start);
+                
+                counter++;
+
+                var diff = (real - ideal);
+                form.diff.value = diff;
+
+                setTimeout(function() { instance(); }, (speed - diff)); // 通过系统时间进行修复
+
+            };
+            setTimeout(function() { instance(); }, speed);
+        }
+
+        // let count = 0;
+        // //耗时任务
+        // setInterval(function(){
+        //     let i = 0;
+        //     while(i++ < 100000000);
+        // }, 0);
+
+        // // worker 解决方案
+        // let worker = new Worker('./worker.js')
+
+        for (var i = 0; i < 5; i++) {
+            setTimeout((j)=>{
+                // (function(j){console.log(j)})(i)
+                console.log(j)
+            }, 1000 * i,i);
+        }
+    </script>
+</body>
+</html>
