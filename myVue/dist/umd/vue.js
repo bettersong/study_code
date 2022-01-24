@@ -93,11 +93,14 @@
     };
   });
 
+  var uid = 0;
+
   var Dep = /*#__PURE__*/function () {
     function Dep() {
       _classCallCheck(this, Dep);
 
-      this.subs = [];
+      this.id = uid++;
+      this.subs = []; // subscribes订阅者，存储订阅者，这里放的是Watcher的实例
     } //收集观察者
 
 
@@ -105,13 +108,24 @@
       key: "addSub",
       value: function addSub(watcher) {
         this.subs.push(watcher);
+      } // 添加依赖
+
+    }, {
+      key: "depend",
+      value: function depend() {
+        // 自己指定的全局位置，全局唯一,实例化Watcher时会赋值Dep.target = Watcher实例
+        if (Dep.target) {
+          this.addSub(Dep.target);
+        }
       } //通知观察者去更新
 
     }, {
       key: "notify",
       value: function notify() {
         console.log('通知观察者更新～');
-        this.subs.forEach(function (w) {
+        var subs = this.subs.slice(); // 复制一份
+
+        subs.forEach(function (w) {
           return w.update();
         });
       }
@@ -178,7 +192,12 @@
       enumerable: true,
       get: function get() {
         //获取值
-        //  依赖收集
+        // 如果现在处于依赖的手机阶段
+        if (Dep.target) {
+          dep.depend();
+        } //  依赖收集
+
+
         return value;
       },
       set: function set(newV) {

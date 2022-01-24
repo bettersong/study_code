@@ -48,6 +48,10 @@ export function observe (data) {
          enumerable:true,
          get(){
              //获取值
+             // 如果现在处于依赖的手机阶段
+             if(Dep.target) {
+                 dep.depend()
+             }
             //  依赖收集
             return value
          },
