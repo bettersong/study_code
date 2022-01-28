@@ -5,8 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .update{
+            background:rosybrown;
+        }
+    </style>
 </head>
 <body>
-    <script src="4.promise,async.js"></script>
+    <div style="width: 50%">
+        <div class="box" style="width:50%">Hello world</div>
+    </div>
+    <script>
+        const el = document.querySelector('.box')
+        el.classList.add('update')
+        const fruits = ['Apple', 'Orange', 'Banana', 'Melon'];
+        // const fragment = document.createDocumentFragment();
+        const cloneEl = el.cloneNode(true)
+        fruits.forEach(fruit => {
+            const li = document.createElement('li');
+            li.innerHTML = fruit;
+            cloneEl.appendChild(li);
+        });
+        // el.appendChild(cloneEl);
+        el.parentElement.replaceChild(cloneEl,el)
+
+    </script>
+    <!-- <script src="4.promise,async.js"></script> -->
 </body>
 </html>
