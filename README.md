@@ -4,7 +4,7 @@
 
 学习代码记录📝
 
-![nanjiu](./images/nanjiu.png)
+![nanjiu](./images/nanjiu.gif)
 
 - 原型链
 - 继承
